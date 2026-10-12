@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Block Puzzle - OrbitBadi</title>
+    <meta name="description" content="Play Color Block Puzzle by OrbitBadi. Relax, train your brain, and enjoy the ultimate offline color block puzzle experience on Android.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Color Block Puzzle - Play Free on Android">
+    <meta property="og:description" content="Relaxing, addictive color-block puzzle game with Endless, Timed, and Daily Challenge modes. Play offline anytime!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://juberbadi.github.io/">
+    <meta property="og:image" content="https://juberbadi.github.io/app-icon.png">
+
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-gradient: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #EC4899 100%);
+            --dark-bg: #0A0F1D;
+            --card-bg: #151D30;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        .brand-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 40px auto 80px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 48px;
+        }
+
+        @media (max-width: 868px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                margin-top: 20px;
+            }
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(79, 70, 229, 0.15);
+            border: 1px solid rgba(79, 70, 229, 0.3);
+            border-radius: 9999px;
+            color: #A5B4FC;
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        @media (max-width: 868px) {
+            .badge-pill {
+                margin: 0 auto;
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2.35rem;
+            }
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        .cta-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 868px) {
+            .cta-group {
+                justify-content: center;
+            }
+        }
+
+        /* Play Store Button */
+        .google-play-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #000000;
+            color: #FFFFFF;
+            padding: 14px 28px;
+            border-radius: 14px;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 20px rgba(79, 70, 229, 0.25);
+            transition: all 0.25s ease;
+        }
+
+        .google-play-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.7), 0 0 30px rgba(124, 58, 237, 0.4);
+        }
+
+        .google-play-btn svg {
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+        }
+
+        .play-text-top {
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #CBD5E1;
+            line-height: 1;
+        }
+
+        .play-text-bottom {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #FFFFFF;
+        }
+
+        /* Hero Image/Card */
+        .hero-media {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .icon-wrapper {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width: 640px) {
+            .icon-wrapper {
+                width: 220px;
+                height: 220px;
+            }
+        }
+
+        .icon-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            filter: blur(50px);
+            opacity: 0.4;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .app-icon {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 52px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .app-icon:hover {
+            transform: scale(1.04) rotate(-1deg);
+        }
+
+        /* Screenshot Gallery */
+        .gallery-section {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+        }
+
+        .gallery-scroll-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 10px 30px;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
+        }
+
+        .gallery-scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .gallery-scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(79, 70, 229, 0.5);
+            border-radius: 4px;
+        }
+
+        .screenshot-item {
+            flex: 0 0 260px;
+            scroll-snap-align: center;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            background: #101625;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-6px);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Features Section */
+        .features-section {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 32px 24px;
+            border-radius: 20px;
+            transition: transform 0.25s, border-color 0.25s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 2.25rem;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: #FFFFFF;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Banner CTA */
+        .cta-banner {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
+        }
+
+        .banner-inner {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(124, 58, 237, 0.15) 100%);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 24px;
+            padding: 60px 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .banner-inner h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+        }
+
+        .banner-inner p {
+            color: var(--text-muted);
+            max-width: 600px;
+            font-size: 1.05rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 20px;
+            background: #060A14;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: #FFFFFF;
+        }
+
+        .copyright {
+            color: #64748B;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <nav>
+        <a href="/" class="brand-logo">OrbitBadi</a>
+        <div class="nav-links">
+            <a href="#screenshots">Screenshots</a>
+            <a href="#features">Features</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms.html">Terms</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge-pill">
+                <span>⭐</span> 100% Free &amp; Offline Puzzle Game
+            </div>
+            <h1>Train Your Brain with <span>Color Block Puzzle</span></h1>
+            <p>
+                Experience the satisfying color-matching puzzle game designed to sharpen your mind and melt away stress. Simple to learn, deep to master, and always playable on the go.
+            </p>
+            <div class="cta-group">
+                <a href="https://play.google.com/store/apps/details?id=com.colorblockpuzzle.game&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="google-play-btn">
+                    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#00d6ff" d="M38.5 25.3c-4 4.5-6.5 11.2-6.5 19.7v422c0 8.5 2.5 15.2 6.5 19.7l1.1 1.1 236.2-236.2v-5.6L39.6 24.2l-1.1 1.1z"/>
+                        <path fill="#00f076" d="M354.2 342.1l-78.4-78.4v-5.6l78.4-78.4 1.7 1 93 52.8c26.5 15 26.5 39.7 0 54.8l-93 52.8-1.7 1z"/>
+                        <path fill="#ff385c" d="M355.9 341.1L275.8 261 38.5 486.8c8.7 9.2 23.2 10.3 39.4 1.1l278-157.9"/>
+                        <path fill="#ffba00" d="M355.9 170.9L77.9 24.1C61.7 14.9 47.2 16 38.5 25.2L275.8 261l80.1-80.1z"/>
+                    </svg>
+                    <div>
+                        <span class="play-text-top">GET IT ON</span>
+                        <span class="play-text-bottom">Google Play</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-media">
+            <div class="icon-wrapper">
+                <div class="icon-glow"></div>
+                <img src="app-icon.png" alt="Color Block Puzzle App Icon" class="app-icon">
+            </div>
+        </div>
+    </section>
+
+    <!-- Gameplay Screenshots Gallery -->
+    <section class="gallery-section" id="screenshots">
+        <div class="section-header">
+            <h2>Gameplay &amp; Features</h2>
+            <p>Scroll to explore the colorful themes, power-ups, and smooth block placement.</p>
+        </div>
+
+        <div class="gallery-scroll-container">
+            <div class="screenshot-item">
+                <img src="screenshots/01_Color_Your_Calm.jpg" alt="Color Your Calm - Color Block Puzzle">
+            </div>
+            <div class="screenshot-item">
+                <img src="screenshots/02_Place_With_Ease.jpg" alt="Place With Ease - Gameplay">
+            </div>
+            <div class="screenshot-item">
+                <img src="screenshots/03_Choose_A_Board.jpg" alt="Choose A Board - Multiple Themes">
+            </div>
+            <div class="screenshot-item">
+                <img src="screenshots/04_Sweet_Moves.jpg" alt="Sweet Moves - Combos">
+            </div>
+            <div class="screenshot-item">
+                <img src="screenshots/05_On_Fire.jpg" alt="On Fire - High Scores">
+            </div>
+            <div class="screenshot-item">
+                <img src="screenshots/06_Boost_Your_Run.jpg" alt="Boost Your Run - Power-Ups">
+            </div>
+            <div class="screenshot-item">
+                <img src="screenshots/08_Play_Offline.jpg" alt="Play Offline Anywhere">
+            </div>
+            <div class="screenshot-item">
+                <img src="screenshots/09_Chase_Combos.jpg" alt="Chase Combos - Clear Lines">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="section-header">
+            <h2>Why Players Love It</h2>
+            <p>Designed for quick breaks, daily habits, and endless puzzle enjoyment.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🧩</div>
+                <h3>3 Game Modes</h3>
+                <p>Enjoy Endless relaxing mode, high-energy 3-minute Timed arcade mode, or test yourself with Daily Challenges.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">✈️</div>
+                <h3>100% Offline Play</h3>
+                <p>No Wi-Fi or data connection required. Play anywhere—on commutes, flights, or when relaxing off the grid.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💥</div>
+                <h3>Combos &amp; Bonuses</h3>
+                <p>Clear multiple rows and columns simultaneously to trigger massive combos, colorful particle fireworks, and Perfect Clear rewards!</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔨</div>
+                <h3>Helpful Power-Ups</h3>
+                <p>Use the Hammer to smash blocking tiles, the Undo button to reverse tricky moves, or Refresh to draw a fresh set of blocks.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="cta-banner">
+        <div class="banner-inner">
+            <h2>Ready to Test Your Puzzle Skills?</h2>
+            <p>Download Color Block Puzzle today and start your journey to a new personal high score!</p>
+            <a href="https://play.google.com/store/apps/details?id=com.colorblockpuzzle.game&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" class="google-play-btn">
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#00d6ff" d="M38.5 25.3c-4 4.5-6.5 11.2-6.5 19.7v422c0 8.5 2.5 15.2 6.5 19.7l1.1 1.1 236.2-236.2v-5.6L39.6 24.2l-1.1 1.1z"/>
+                    <path fill="#00f076" d="M354.2 342.1l-78.4-78.4v-5.6l78.4-78.4 1.7 1 93 52.8c26.5 15 26.5 39.7 0 54.8l-93 52.8-1.7 1z"/>
+                    <path fill="#ff385c" d="M355.9 341.1L275.8 261 38.5 486.8c8.7 9.2 23.2 10.3 39.4 1.1l278-157.9"/>
+                    <path fill="#ffba00" d="M355.9 170.9L77.9 24.1C61.7 14.9 47.2 16 38.5 25.2L275.8 261l80.1-80.1z"/>
+                </svg>
+                <div>
+                    <span class="play-text-top">GET IT ON</span>
+                    <span class="play-text-bottom">Google Play</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="copyright">
+                &copy; 2026 OrbitBadi. All rights reserved.
+            </div>
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="mailto:baditechlabs@gmail.com">Contact Support</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
